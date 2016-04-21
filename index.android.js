@@ -26,8 +26,10 @@ export default {
     if(fetchParams.after) {
       fetchParams.after = fetchParams.after.replace(ANDROID_FILE_PREFIX, '');
     }
-    CameraRollAndroid.getCameraImages(fetchParams, (imageDataList) => {
-      onSuccess(formatToIosCameraRollFormat(imageDataList));
+    return new Promise((resolve, reject) => {
+      CameraRollAndroid.getCameraImages(fetchParams, (imageDataList) => {
+        resolve(formatToIosCameraRollFormat(imageDataList));
+      });
     });
   },
 };
